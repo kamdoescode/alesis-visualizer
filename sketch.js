@@ -4,13 +4,6 @@ let fft;
 let volhistory = [];
 let w;
 
-function toggleSong() {
-  if (song.isPlaying()) {
-    song.pause();
-  } else {
-    song.play();
-  }
-}
 
 function preload() {
   song = loadSound("AlesisLive.mp3");
@@ -19,11 +12,13 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   colorMode(HSB);
-  song.play();
-  button = createButton("pause");
-  button.mousePressed(toggleSong);
   fft = new p5.FFT(0.9, 128);
   w = width/64
+}
+
+function loaded() {
+  button = createButton('play');
+  button.mousePressed(togglePlaying);
 }
 
 function draw() {
@@ -38,4 +33,15 @@ function draw() {
   }
   console.log(spectrum);
  
+}
+
+function togglePlaying() {
+  if (!song.isPlaying()) {
+    song.play();
+    song.setVolume(0.3);
+    button.html('pause');
+  } else {
+    song.stop();
+    button.html('play');
+  }
 }
