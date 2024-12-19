@@ -12,14 +12,13 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   colorMode(HSB);
+  button = createButton("play");
+  button.position(10, windowHeight - 50);
+  button.mousePressed(togglePlaying);
   fft = new p5.FFT(0.9, 128);
   w = width/64
 }
 
-function loaded() {
-  button = createButton('play');
-  button.mousePressed(togglePlaying);
-}
 
 function draw() {
   background(0);
@@ -38,7 +37,6 @@ function draw() {
 function togglePlaying() {
   if (!song.isPlaying()) {
     song.play();
-    song.setVolume(0.3);
     button.html('pause');
   } else {
     song.stop();
