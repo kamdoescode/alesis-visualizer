@@ -36,6 +36,7 @@ function draw() {
 
 function togglePlaying() {
   if (!song.isPlaying()) {
+    getAudioContext().resume();
     song.play();
     button.html('pause');
   } else {
